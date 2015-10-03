@@ -1,31 +1,26 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
 
 var React = require('react-native');
 var {
   AppRegistry,
-  StyleSheet,
-  Text,
   View,
+  Text,
+  TextInput,
+  StyleSheet,
 } = React;
 
 var BookBrowser = React.createClass({
   render: function() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
+      <View style={styles.container} >
+        <Text style={styles.headline} >
+          BookBrowser
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
+        <Text style={styles.lable} >
+          Find book containing:
         </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <TextInput style={styles.textInput}
+         placeholder= "  e.g. JavaScript or Mobile" />
       </View>
     );
   }
@@ -34,19 +29,31 @@ var BookBrowser = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection:  'column',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    alignItems:     'center',
+    backgroundColor: '#b443d0',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  headline: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: '#FFF',
+    marginBottom: 28,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  lable: {
+    fontSize: 24,
+    fontWeight: 'normal',
+    color: '#FFF',
+    marginBottom: 8,
+  },
+  textInput: {
+    borderColor: '#8E8E93',
+    borderWidth: 0.5,
+    backgroundColor: '#FFF',
+    height: 40,
+    marginLeft:  60,
+    marginRight: 60,
+    padding: 8,
   },
 });
 
