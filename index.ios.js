@@ -16,6 +16,7 @@ var BookBrowser = React.createClass({
         initialRoute= {{
           component: SearchScreen,
           title: 'Search',
+          passProps: { placeholder: 'javasript' },
         }}
         style= {styles.navContainer}
       /> 

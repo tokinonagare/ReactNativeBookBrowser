@@ -9,7 +9,18 @@ var {
   StyleSheet,
 } = React;
 
+var ResultsScreen = require('./ResultsScreen');
+
 var SearchScreen = React.createClass({
+
+  gotoResultsScreen: function(searchPhrase) {
+    this.props.navigator.push({
+      title: 'Results',
+      component: ResultsScreen,
+      passProps: { 'searchPhrase': searchPhrase }
+    });
+  },
+
   render: function() {
     return (
       <View style={styles.container} >
@@ -20,10 +31,10 @@ var SearchScreen = React.createClass({
           Find books containing:
         </Text>
         <TextInput style={styles.textInput}
-         placeholder= "  e.g. JavaScript or Mobile"
+         placeholder= {this.props.placeholder}
          returnKeyType= "search"
          enablesReturnKeyAutomatically= {true}
-         onEndEditing= { event => console.log(event.nativeEvent.text) } />
+         onEndEditing= { event => this.gotoResultsScreen(event.nativeEvent.text) } />
       </View>
     );
   }
