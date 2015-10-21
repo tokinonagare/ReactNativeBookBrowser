@@ -37,7 +37,7 @@ var SearchScreen = React.createClass({
          onEndEditing= { event => this.gotoResultsScreen(event.nativeEvent.text) } />
       </View>
     );
-  },
+  }
 });
 
 var styles = StyleSheet.create({
@@ -46,7 +46,7 @@ var styles = StyleSheet.create({
     flexDirection:  'column',
     justifyContent: 'center',
     alignItems:     'center',
-    backgroundColor: Math.random() > 0.5 ? '#b443d0' : '#4CD964',
+    backgroundColor: Math.random() > 0.5 ? '#b443d0' : '#000000',
   },
   headline: {
     fontSize: 36,
@@ -68,7 +68,7 @@ var styles = StyleSheet.create({
     marginLeft:  60,
     marginRight: 60,
     padding: 8,
-  },
+  }
 });
 
 module.exports = SearchScreen;

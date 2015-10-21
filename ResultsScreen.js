@@ -5,8 +5,12 @@ var {
 	View,
 	ListView,
 	Text,
+	Image,
+	TouchableHighlight,
 	StyleSheet,
 } = React;
+
+var BookDetails = require('./BookDetails');
 
 var buildUrl = function(q) {
   return 'https://www.googleapis.com/books/v1/volumes?q='
@@ -38,6 +42,14 @@ var ResultsScreen = React.createClass({
     	});
     })
     .catch(error   => console.dir(error));
+  },
+
+  showBookDetails: function(book) {
+  	this.props.navigator.push({
+  		title: book.volumeInfo.title,
+  		component: BookDetails,
+  		passProps: {book}
+  	});
   },
 
   render: function() {
@@ -73,17 +85,24 @@ var ResultsScreen = React.createClass({
 
 	renderBook: function(book) {
 		return (
-			<View   style={styles.row}>
-				<Text style={styles.title}>
-					{book.volumeInfo.title}
-				</Text>
-				<Text style={styles.subtitle}>
-					{book.volumeInfo.subtitle}
-				</Text>
-			</View>
+			<TouchableHighlight onPress = {() => this.showBookDetails(book)}>
+				<View   style = {styles.row}>
+					<Image
+						style  = {styles.thumbnail}
+						source = {{uri: book.volumeInfo.imageLinks.smallThumbnail}}
+						/>
+					<View  style = {styles.rightContainer}>
+						<Text style = {styles.title}>
+							{book.volumeInfo.title}
+						</Text>
+						<Text style = {styles.subtitle}>
+							{book.volumeInfo.subtitle}
+						</Text>
+					</View>
+				</View>
+			</TouchableHighlight>
 		);
 	}
-
 });
 
 var styles = StyleSheet.create({
@@ -92,7 +111,7 @@ var styles = StyleSheet.create({
 		flexDirection: 	 'column',
 		justifyContent:  'center',
 		alignItems: 		 'center',
-		backgroundColor: '#5AC8FA',
+		backgroundColor: '#b443d0',
 	},
 	label: {
 		fontSize: 	24,
@@ -103,15 +122,16 @@ var styles = StyleSheet.create({
 
 	},
 
+	rightContainer: {
+		flex: 1,
+	},
+
 	row: {
 		flex: 1,
-		flexDirection:  'column',
+		flexDirection:  'row',
 		justifyContent: 'center',
 		alignItems: 		'center',
-		backgroundColor:'#5AC8FA',
-		paddingTop: 	 20,
-		paddingBottom: 20,
-		paddingLeft: 	 20,
+		backgroundColor:'#b443d0',
 		paddingRight:  20,
 		marginTop: 		 1,
 	},
@@ -127,6 +147,12 @@ var styles = StyleSheet.create({
 		fontWeight: 'normal',
 		color: 			'#fff',
 	},
+
+	thumbnail: {
+		width: 			 70,
+		height: 	   108,
+		marginRight: 16,
+	}
 });
 
 module.exports = ResultsScreen;
