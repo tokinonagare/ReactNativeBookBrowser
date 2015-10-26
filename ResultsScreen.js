@@ -7,6 +7,7 @@ var {
 	Text,
 	Image,
 	TouchableHighlight,
+	TouchableOpacity,
 	StyleSheet,
 } = React;
 
@@ -44,12 +45,12 @@ var ResultsScreen = React.createClass({
     .catch(error   => console.dir(error));
   },
 
-  showBookDetails: function(book) {
-  	this.props.navigator.push({
-  		title: book.volumeInfo.title,
-  		component: BookDetails,
-  		passProps: {book}
-  	});
+  goBack: function() {
+  	this.props.navigator.pop();
+  },
+
+  retry: function() {
+  	this.fetchResults();
   },
 
   render: function() {
@@ -63,12 +64,27 @@ var ResultsScreen = React.createClass({
 	renderLoadingMessage: function() {
 		return (
 			<View   style = {styles.container}>
-				<Text style = {styles.label}>
-					Searching for "{this.props.searchPhrase}".
-				</Text>
-				<Text style = {styles.label}>
-					Please wait...
-				</Text>
+				<View style = {styles.loadingInfoContainer}>
+					<Text style = {styles.label}>
+						Searching for "{this.props.searchPhrase}".
+					</Text>
+					<Text style = {styles.label}>
+						Please wait...
+					</Text>
+				</View>
+
+				<View style = {styles.modalButtonsContainer}>
+					<TouchableOpacity onPress = {this.goBack}>
+						<View   style = {styles.modalButon}>
+							<Text style = {styles.modalButonText}>&lt; Go back</Text>
+						</View>
+					</TouchableOpacity>
+					<TouchableOpacity onPress = {this.retry}>
+						<View   style = {styles.modalButon}>
+							<Text style = {styles.modalButtonText}>&#8635; Retry</Text>
+						</View>
+					</TouchableOpacity>
+				</View>
 			</View>
 		);
 	},
@@ -91,7 +107,7 @@ var ResultsScreen = React.createClass({
 						style  = {styles.thumbnail}
 						source = {{uri: book.volumeInfo.imageLinks.smallThumbnail}}
 						/>
-					<View  style = {styles.rightContainer}>
+					<View   style = {styles.rightContainer}>
 						<Text style = {styles.title}>
 							{book.volumeInfo.title}
 						</Text>
@@ -102,15 +118,21 @@ var ResultsScreen = React.createClass({
 				</View>
 			</TouchableHighlight>
 		);
-	}
+	},
+
+	showBookDetails: function(book) {
+  	this.props.navigator.push({
+  		title: book.volumeInfo.title,
+  		component: BookDetails,
+  		passProps: {book}
+  	});
+  }
 });
 
 var styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		flexDirection: 	 'column',
-		justifyContent:  'center',
-		alignItems: 		 'center',
 		backgroundColor: '#b443d0',
 	},
 	label: {
@@ -119,7 +141,6 @@ var styles = StyleSheet.create({
 		color: 			'#fff',
 	},
 	listView: {
-
 	},
 
 	rightContainer: {
@@ -139,7 +160,7 @@ var styles = StyleSheet.create({
 	title: {
 		fontSize: 	20,
 		fontWeight: 'bold',
-		color: 			'#fff',
+		color: 			'#fff'
 	},
 
 	subtitle: {
@@ -152,6 +173,38 @@ var styles = StyleSheet.create({
 		width: 			 70,
 		height: 	   108,
 		marginRight: 16,
+	},
+
+	loadingInfoContainer: {
+		flex: 1,
+		flexDirection: 'column',
+		justifyContent:'flex-end',
+    alignItems: 	 'center',
+	},
+
+	modalButtonsContainer: {
+	  flex: 1,
+	  flexDirection: 'row',
+	 	justifyContent:'center',
+		alignItems: 	 'flex-start',
+		top: 60,
+  },
+
+	modalButon: {
+		borderColor: '#ffffff',
+		borderRadius:   4,
+		borderWidth: 		1,
+		marginLeft: 	 20,
+		marginRight: 	 20,
+		paddingLeft: 	 20,
+		paddingRight:  20,
+		paddingTop: 	 10,
+		paddingBottom: 10,
+	},
+
+	modalButonText: {
+		fontSize: 18,
+		color: '#ffffff',
 	}
 });
 
