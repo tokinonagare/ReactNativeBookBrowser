@@ -44,7 +44,7 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection:  'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems:     'center',
     backgroundColor: Math.random() > 0.5 ? '#b443d0' : '#000000',
   },
@@ -52,6 +52,7 @@ var styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: 'bold',
     color: '#FFF',
+    marginTop: 160,
     marginBottom: 28,
   },
   lable: {

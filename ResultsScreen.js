@@ -41,6 +41,7 @@ var ResultsScreen = React.createClass({
     		isLoading: false,
     		dataSource: this.state.dataSource.cloneWithRows(jsonData.items)
     	});
+    	console.dir(jsonData.items);
     })
     .catch(error   => console.dir(error));
   },
@@ -75,12 +76,12 @@ var ResultsScreen = React.createClass({
 
 				<View style = {styles.modalButtonsContainer}>
 					<TouchableOpacity onPress = {this.goBack}>
-						<View   style = {styles.modalButon}>
-							<Text style = {styles.modalButonText}>&lt; Go back</Text>
+						<View   style = {styles.modalButton}>
+							<Text style = {styles.modalButtonText}>&lt; Go back</Text>
 						</View>
 					</TouchableOpacity>
 					<TouchableOpacity onPress = {this.retry}>
-						<View   style = {styles.modalButon}>
+						<View   style = {styles.modalButton}>
 							<Text style = {styles.modalButtonText}>&#8635; Retry</Text>
 						</View>
 					</TouchableOpacity>
@@ -190,7 +191,7 @@ var styles = StyleSheet.create({
 		top: 60,
   },
 
-	modalButon: {
+	modalButton: {
 		borderColor: '#ffffff',
 		borderRadius:   4,
 		borderWidth: 		1,
@@ -202,7 +203,7 @@ var styles = StyleSheet.create({
 		paddingBottom: 10,
 	},
 
-	modalButonText: {
+	modalButtonText: {
 		fontSize: 18,
 		color: '#ffffff',
 	}
