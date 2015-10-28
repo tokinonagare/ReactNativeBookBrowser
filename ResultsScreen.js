@@ -95,8 +95,7 @@ var ResultsScreen = React.createClass({
 			<ListView
 				dataSource = {this.state.dataSource}
 				renderRow  = {this.renderBook}
-				style 		 = {styles.listView}
-			/>
+				style 		 = {styles.listView}/>
 		);
 	},
 
@@ -106,8 +105,7 @@ var ResultsScreen = React.createClass({
 				<View   style = {styles.row}>
 					<Image
 						style  = {styles.thumbnail}
-						source = {{uri: book.volumeInfo.imageLinks.smallThumbnail}}
-						/>
+						source = {{uri: book.volumeInfo.imageLinks.smallThumbnail}}/>
 					<View   style = {styles.rightContainer}>
 						<Text style = {styles.title}>
 							{book.volumeInfo.title}
